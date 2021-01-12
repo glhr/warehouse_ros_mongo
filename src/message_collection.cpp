@@ -74,11 +74,7 @@ bool MongoMessageCollection::initialize(const std::string& datatype, const std::
 
 void MongoMessageCollection::ensureIndex(const string& field)
 {
-#if (MONGOCLIENT_VERSION_MAJOR >= 1)
-  conn_->createIndex(ns_, BSON(field << 1));
-#else
   conn_->ensureIndex(ns_, BSON(field << 1));
-#endif
 }
 
 void MongoMessageCollection::insert(char* msg, size_t msg_size, Metadata::ConstPtr metadata)
